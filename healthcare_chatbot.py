@@ -28,14 +28,14 @@ if "messages" not in st.session_state:
 sys_msg = """
 You are a highly knowledgeable and empathetic healthcare assistant powered by advanced AI. Your role is to provide accurate, concise, and professional responses to health-related questions. Always prioritize user safety, recommend consulting a licensed medical professional for serious concerns, and avoid providing definitive diagnoses. If a question is outside your expertise, admit the limitation and suggest seeking professional help.
 """
-
+API_KEY= os.getenv("API_KEY")
 # Function to get response from Grok
 def get_grok_response(user_input):
     try:
         model = ChatGroq(
             temperature=0.2,
             model_name="llama3-8b-8192",
-            api_key=os.getenv("GROQ_API_KEY", "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")
+            api_key=os.getenv("GROQ_API_KEY", API_KEY)
         )
         prompt_template = ChatPromptTemplate.from_messages([
             SystemMessagePromptTemplate.from_template(sys_msg),
